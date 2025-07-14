@@ -1,0 +1,118 @@
+package com.example.MoodMeal.model;
+
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "meals")
+public class Meal {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false,length = 100)
+    private String name;
+
+    @Column(nullable = false,length = 200)
+    private String description;
+
+    @Column(length = 100)
+    private String cusine;
+
+    @ElementCollection
+    @CollectionTable(name = "meal_ingredients", joinColumns = @JoinColumn(name = "meal_id"))
+    @Column(name = "ingredient")
+    private Set<String> ingredients = new HashSet<>();
+
+    @Column(length = 255)
+    private String dietaryTags;
+
+    @Column
+    private Integer calories;
+
+    @Column(length = 255)
+    private String allergens;
+
+    @ElementCollection(targetClass = MoodType.class)
+    @CollectionTable(name = "meal_moods", joinColumns = @JoinColumn(name = "meal_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "mood_type")
+    private Set<MoodType> suitableMoods = new HashSet<>();
+
+    public Meal(){}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCusine() {
+        return cusine;
+    }
+
+    public void setCusine(String cusine) {
+        this.cusine = cusine;
+    }
+
+    public Set<String> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<String> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public String getDietaryTags() {
+        return dietaryTags;
+    }
+
+    public void setDietaryTags(String dietaryTags) {
+        this.dietaryTags = dietaryTags;
+    }
+
+    public Integer getCalories() {
+        return calories;
+    }
+
+    public void setCalories(Integer calories) {
+        this.calories = calories;
+    }
+
+    public String getAllergens() {
+        return allergens;
+    }
+
+    public void setAllergens(String allergens) {
+        this.allergens = allergens;
+    }
+
+    public Set<MoodType> getSuitableMoods() {
+        return suitableMoods;
+    }
+
+    public void setSuitableMoods(Set<MoodType> suitableMoods) {
+        this.suitableMoods = suitableMoods;
+    }
+}
