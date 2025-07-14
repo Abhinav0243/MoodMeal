@@ -62,4 +62,5 @@ public class Mood {
         this.description = description;
         this.user = user;
     }
+
 }
