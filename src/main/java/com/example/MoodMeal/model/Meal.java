@@ -42,6 +42,8 @@ public class Meal {
     @Column(name = "mood_type")
     private Set<MoodType> suitableMoods = new HashSet<>();
 
+    public Meal(){}
+
     public Long getId() {
         return id;
     }
