@@ -27,12 +27,12 @@ public class UserService {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Set.of(Role.ROLE_USER));
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     public User getUserById(Long userId){
         return userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with userId: "+userId);
+                .orElseThrow(() -> new IllegalArgumentException("User not found with userId: "+userId));
     }
     public User getUserByUsername(String username){
         return userRepository.findByUsername(username)
