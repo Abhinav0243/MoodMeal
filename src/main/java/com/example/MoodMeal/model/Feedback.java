@@ -1,10 +1,13 @@
 package com.example.MoodMeal.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
+
+@Data
 @Table(name="feedbacks")
 public class Feedback {
 
