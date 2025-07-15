@@ -32,7 +32,7 @@ public class MealService {
         meal.setName(updatedMeal.getName());
         meal.setId(updatedMeal.getId());
         meal.setDescription(updatedMeal.getDescription());
-        meal.setCusine(updatedMeal.getCusine());
+        meal.setCuisine(updatedMeal.getCuisine());
         meal.setCalories(updatedMeal.getCalories());
         meal.setAllergens(updatedMeal.getAllergens());
         meal.setDietaryTags(updatedMeal.getDietaryTags());
