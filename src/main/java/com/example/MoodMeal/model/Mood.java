@@ -1,8 +1,6 @@
 package com.example.MoodMeal.model;
 
 import jakarta.persistence.*;
-
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,6 +24,17 @@ public class Mood {
 
     @Column(nullable = false)
     private LocalDateTime detectedAt;
+
+    // Default constructor
+    public Mood() {}
+
+    // Constructor with fields (optional — include only if needed)
+    public Mood(Long id, MoodType moodType, String description, User user) {
+        this.id = id;
+        this.moodType = moodType;
+        this.description = description;
+        this.user = user;
+    }
 
     public Long getId() {
         return id;

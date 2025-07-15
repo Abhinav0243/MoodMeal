@@ -8,12 +8,12 @@ import java.util.List;
 
 public interface MealRepository extends JpaRepository<Meal, Long> {
 
-    // Find meals by mood
+
     List<Meal> findBySuitableMoods(MoodType moodType);
 
-    // Find meals by cuisine
-    List<Meal> findByCusineIgnoreCase(String cusine);
 
-    // Find meals containing specific dietary tags
+    List<Meal> findByCuisineIgnoreCase(String cusine);
+
+
     List<Meal> findByDietaryTagsContainingIgnoreCase(String dietaryTags);
 }
