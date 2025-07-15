@@ -26,10 +26,9 @@ public class SuggestionController {
         return ResponseEntity.ok(suggestions);
     }
     @GetMapping("/by-cuisine")
-    public ResponseEntity<List<Meal>> suggestMealsByCuisine(@RequestParam Long userId,@RequestParam MoodType moodType,@RequestParam String cuisine){
+    public ResponseEntity<List<Meal>> suggestMealByCuisine(@RequestParam Long userId,@RequestParam MoodType moodType,@RequestParam String cuisine){
         List<Meal> suggestions=suggestionService.suggestMealByCuisine(userId,moodType,cuisine);
         return ResponseEntity.ok(suggestions);
     }
-
 
 }

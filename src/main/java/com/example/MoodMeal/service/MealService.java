@@ -48,9 +48,10 @@ public class MealService {
     }
 
     public List<Meal> getMealByMood(MoodType moodType){
+
         return mealRepository.findBySuitableMoods(moodType);
     }
-    public List<Meal> getMealByCusine(String cuisine){
+    public List<Meal> getMealByCuisine(String cuisine){
         return mealRepository.findByCuisineIgnoreCase(cuisine);
     }
     public List<Meal> getMealsByDietaryTag(String dietaryTag) {

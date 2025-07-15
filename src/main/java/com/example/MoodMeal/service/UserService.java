@@ -18,7 +18,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User regiserterUser(User user){
+    public User registerUser(User user){
         if(userRepository.existsByUsername(user.getUsername())){
             throw new IllegalArgumentException("Error: Username already taken");
         }

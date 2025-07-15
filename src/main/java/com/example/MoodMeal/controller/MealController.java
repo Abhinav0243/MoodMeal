@@ -43,17 +43,17 @@ public class MealController {
         mealService.deleteMeal(mealId);
         return ResponseEntity.ok("Meal deleted Successfully");
     }
-    @GetMapping("/mood")
+    @GetMapping("/by-mood")
     public ResponseEntity<List<Meal>> getMealsByMood(@RequestParam MoodType moodType){
         List<Meal> meals=mealService.getMealByMood(moodType);
         return ResponseEntity.ok(meals);
     }
-    @GetMapping("/cuisine")
+    @GetMapping("/by-cuisine")
     public ResponseEntity<List<Meal>> getMealsByCuisine(@RequestParam String cuisine){
-        List<Meal> meals=mealService.getMealByCusine(cuisine);
+        List<Meal> meals=mealService.getMealByCuisine(cuisine);
         return ResponseEntity.ok(meals);
     }
-    @GetMapping("/diet")
+    @GetMapping("/by-diet")
     public ResponseEntity<List<Meal>> getMealsByDietaryTag(@RequestParam String tag){
         List<Meal> meals=mealService.getMealsByDietaryTag(tag);
         return ResponseEntity.ok(meals);
