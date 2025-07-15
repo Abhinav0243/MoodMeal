@@ -2,6 +2,8 @@ package com.example.MoodMeal.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "moods")
 public class Mood {
@@ -20,6 +22,11 @@ public class Mood {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @Column(nullable = false)
+    private LocalDateTime detectedAt;
+
+
 
     public Mood() {}
 
@@ -54,6 +61,14 @@ public class Mood {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public LocalDateTime getDetectedAt() {
+        return detectedAt;
+    }
+
+    public void setDetectedAt(LocalDateTime detectedAt) {
+        this.detectedAt = detectedAt;
     }
 
     public Mood(Long id, MoodType moodType, String description, User user) {
