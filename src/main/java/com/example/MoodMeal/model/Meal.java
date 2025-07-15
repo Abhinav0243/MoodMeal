@@ -20,7 +20,7 @@ public class Meal {
     private String description;
 
     @Column(length = 100)
-    private String cusine;
+    private String cuisine;
 
     @ElementCollection
     @CollectionTable(name = "meal_ingredients", joinColumns = @JoinColumn(name = "meal_id"))
@@ -68,12 +68,12 @@ public class Meal {
         this.description = description;
     }
 
-    public String getCusine() {
-        return cusine;
+    public String getCuisine() {
+        return cuisine;
     }
 
-    public void setCusine(String cusine) {
-        this.cusine = cusine;
+    public void setCuisine(String cuisine) {
+        this.cuisine = cuisine;
     }
 
     public Set<String> getIngredients() {
