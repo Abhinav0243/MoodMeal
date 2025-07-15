@@ -51,7 +51,7 @@ public class MealService {
         return mealRepository.findBySuitableMoods(moodType);
     }
     public List<Meal> getMealByCusine(String cuisine){
-        return mealRepository.findByCusineIgnoreCase(cuisine);
+        return mealRepository.findByCuisineIgnoreCase(cuisine);
     }
     public List<Meal> getMealsByDietaryTag(String dietaryTag) {
         return mealRepository.findByDietaryTagsContainingIgnoreCase(dietaryTag);

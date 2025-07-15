@@ -12,7 +12,7 @@ public interface MealRepository extends JpaRepository<Meal, Long> {
     List<Meal> findBySuitableMoods(MoodType moodType);
 
 
-    List<Meal> findByCusineIgnoreCase(String cusine);
+    List<Meal> findByCuisineIgnoreCase(String cusine);
 
 
     List<Meal> findByDietaryTagsContainingIgnoreCase(String dietaryTags);
