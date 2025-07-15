@@ -2,11 +2,12 @@ package com.example.MoodMeal.model;
 
 import jakarta.persistence.*;
 
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.*;
 
 @Entity
 @Table(name = "meals")
+
 public class Meal {
 
     @Id
@@ -41,8 +42,6 @@ public class Meal {
     @Enumerated(EnumType.STRING)
     @Column(name = "mood_type")
     private Set<MoodType> suitableMoods = new HashSet<>();
-
-    public Meal(){}
 
     public Long getId() {
         return id;

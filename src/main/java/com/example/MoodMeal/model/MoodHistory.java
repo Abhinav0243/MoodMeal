@@ -2,6 +2,7 @@ package com.example.MoodMeal.model;
 
 import jakarta.persistence.*;
 
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,9 +26,6 @@ public class MoodHistory {
 
      @Column(nullable = false)
     private LocalDateTime recordedAt;
-
-     public MoodHistory(){
-     }
 
     public Long getId() {
         return id;

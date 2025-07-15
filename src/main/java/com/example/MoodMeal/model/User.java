@@ -1,11 +1,8 @@
 package com.example.MoodMeal.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-
-import java.util.HashSet;
-import java.util.Set;
+import jakarta.validation.constraints.*;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -48,10 +45,6 @@ public class User {
     @Column(length = 200)
     private String allergies;
 
-    public User(){
-
-    }
-
     public Long getId() {
         return id;
     }
@@ -60,27 +53,27 @@ public class User {
         this.id = id;
     }
 
-    public @NotBlank String getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(@NotBlank String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public @NotBlank @Email String getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(@NotBlank @Email String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public @NotBlank String getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(@NotBlank String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -92,19 +85,19 @@ public class User {
         this.roles = roles;
     }
 
-    public @NotBlank String getFullName() {
+    public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(@NotBlank String fullName) {
+    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
-    public @NotBlank Long getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(@NotBlank Long phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 
@@ -116,7 +109,6 @@ public class User {
         this.dietaryPerferences = dietaryPerferences;
     }
 
-
     public String getAllergies() {
         return allergies;
     }
@@ -124,28 +116,4 @@ public class User {
     public void setAllergies(String allergies) {
         this.allergies = allergies;
     }
-
-    public User(Long id, String username, String email, String password, Set<Role> roles, String fullName, Long phone, String dietaryPerferences, String allergies) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-        this.fullName = fullName;
-        this.phone = phone;
-        this.dietaryPerferences = dietaryPerferences;
-        this.allergies = allergies;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
 }

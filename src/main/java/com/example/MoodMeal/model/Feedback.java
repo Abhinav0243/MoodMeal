@@ -2,9 +2,12 @@ package com.example.MoodMeal.model;
 
 import jakarta.persistence.*;
 
+
 import java.time.LocalDateTime;
 
 @Entity
+
+
 @Table(name="feedbacks")
 public class Feedback {
 
