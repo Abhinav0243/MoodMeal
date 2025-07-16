@@ -35,7 +35,7 @@ public class User {
     @Column(nullable = false,length = 100)
     private String fullName;
 
-    @NotBlank
+    @NotNull
     @Column(length = 25)
     private Long phone;
 
