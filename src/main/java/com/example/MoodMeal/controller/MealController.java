@@ -1,5 +1,6 @@
 package com.example.MoodMeal.controller;
 
+import com.example.MoodMeal.dto.MealDTO;
 import com.example.MoodMeal.model.Meal;
 import com.example.MoodMeal.model.MoodType;
 import com.example.MoodMeal.dto.MealDTO;
@@ -84,5 +85,10 @@ public class MealController {
         meal.setAllergens(dto.getAllergens());
         meal.setSuitableMoods(dto.getSuitableMoods());
         return meal;
+    }
+    @PostMapping("/meals")
+    public ResponseEntity<String> createMeal(@RequestBody MealDTO mealDTO) {
+        mealService.createMeal(mealDTO);
+        return ResponseEntity.ok("Meal created");
     }
 }

@@ -1,5 +1,6 @@
 package com.example.MoodMeal.service;
 
+import com.example.MoodMeal.dto.MealDTO;
 import com.example.MoodMeal.model.Meal;
 import com.example.MoodMeal.model.MoodType;
 import com.example.MoodMeal.repository.MealRepository;
@@ -56,5 +57,13 @@ public class MealService {
     }
     public List<Meal> getMealsByDietaryTag(String dietaryTag) {
         return mealRepository.findByDietaryTagsContainingIgnoreCase(dietaryTag);
+    }
+    public void createMeal(MealDTO mealDTO) {
+        Meal meal = new Meal();
+        meal.setName(mealDTO.getName());
+        meal.setCategory(mealDTO.getCategory());
+        // Assuming you have an enum or string moodType field
+        meal.setMoodType(mealDTO.getMoodType());
+        mealRepository.save(meal);
     }
 }
