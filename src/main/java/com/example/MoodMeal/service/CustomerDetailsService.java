@@ -13,12 +13,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class CustomerDetailsSevice {
+public class CustomerDetailsService {
 
     private UserRepository userRepository;
 
     @Autowired
-    public CustomerDetailsSevice(UserRepository userRepository){
+    public CustomerDetailsService(UserRepository userRepository){
         this.userRepository=userRepository;
     }
 
