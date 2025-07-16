@@ -1,6 +1,7 @@
 package com.example.MoodMeal.service;
 
 import com.example.MoodMeal.dto.MealDTO;
+import com.example.MoodMeal.exception.ResourceNotFoundException;
 import com.example.MoodMeal.model.Meal;
 import com.example.MoodMeal.model.MoodType;
 import com.example.MoodMeal.repository.MealRepository;
@@ -25,7 +26,7 @@ public class MealService {
     }
     public Meal getMealById(Long mealId){
         return mealRepository.findById(mealId)
-                .orElseThrow(() -> new IllegalArgumentException("Meal not found with mealId: " +mealId));
+                .orElseThrow(() -> new ResourceNotFoundException("Meal not found with mealId: " +mealId));
     }
 
     public Meal updateMeal(Long mealId,Meal updatedMeal){
@@ -44,7 +45,7 @@ public class MealService {
 
     public void deleteMeal(Long mealId){
         if(!mealRepository.existsById(mealId)){
-            throw new IllegalArgumentException("Meal not found with mealId: "+ mealId);
+            throw new ResourceNotFoundException("Meal not found with mealId: "+ mealId);
         }
     }
 
