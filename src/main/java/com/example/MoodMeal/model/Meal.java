@@ -14,6 +14,18 @@ public class Meal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+
+    private String category;
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+
     @Column(nullable = false,length = 100)
     private String name;
 
@@ -36,6 +48,17 @@ public class Meal {
 
     @Column(length = 255)
     private String allergens;
+
+    public String getMoodType() {
+        return moodType;
+    }
+
+    public void setMoodType(String moodType) {
+        this.moodType = moodType;
+    }
+
+    private String moodType; // ✅ this must exist
+
 
     @ElementCollection(targetClass = MoodType.class)
     @CollectionTable(name = "meal_moods", joinColumns = @JoinColumn(name = "meal_id"))

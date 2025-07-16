@@ -1,5 +1,6 @@
 package com.example.MoodMeal.controller;
 
+import com.example.MoodMeal.dto.MealDTO;
 import com.example.MoodMeal.model.Meal;
 import com.example.MoodMeal.model.MoodType;
 import com.example.MoodMeal.service.MealService;
@@ -57,5 +58,10 @@ public class MealController {
     public ResponseEntity<List<Meal>> getMealsByDietaryTag(@RequestParam String tag){
         List<Meal> meals=mealService.getMealsByDietaryTag(tag);
         return ResponseEntity.ok(meals);
+    }
+    @PostMapping("/meals")
+    public ResponseEntity<String> createMeal(@RequestBody MealDTO mealDTO) {
+        mealService.createMeal(mealDTO);
+        return ResponseEntity.ok("Meal created");
     }
 }
