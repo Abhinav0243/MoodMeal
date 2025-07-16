@@ -1,5 +1,7 @@
 package com.example.MoodMeal.service;
 
+import com.example.MoodMeal.exception.InvalidInputException;
+import com.example.MoodMeal.exception.ResourceNotFoundException;
 import com.example.MoodMeal.model.Role;
 import com.example.MoodMeal.model.User;
 import com.example.MoodMeal.repository.UserRepository;
@@ -20,10 +22,10 @@ public class UserService {
 
     public User registerUser(User user){
         if(userRepository.existsByUsername(user.getUsername())){
-            throw new IllegalArgumentException("Error: Username already taken");
+            throw new InvalidInputException("Error: Username already taken");
         }
         if(userRepository.existsByEmail(user.getEmail())){
-            throw new IllegalArgumentException("Error: email already taken");
+            throw new InvalidInputException("Error: email already taken");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Set.of(Role.ROLE_USER));
@@ -32,19 +34,19 @@ public class UserService {
 
     public User getUserById(Long userId){
         return userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with userId: "+userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with userId: "+userId));
     }
     public User getUserByUsername(String username){
         return userRepository.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with username: " + username));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with username: " + username));
     }
     public User getUserByEmail(String email){
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with email: "+ email));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with email: "+ email));
     }
     public User updateUser(Long userId, User updatedUser){
         User existingUser = userRepository.findById(userId)
-                .orElseThrow(()-> new IllegalArgumentException("user not found with userId: "+userId));
+                .orElseThrow(()-> new ResourceNotFoundException("user not found with userId: "+userId));
 
         existingUser.setFullName(updatedUser.getFullName());
         existingUser.setPhone(updatedUser.getPhone());
@@ -54,7 +56,7 @@ public class UserService {
     }
     public void changePassword(Long userId,String newPassword){
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with userId: "+ userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with userId: "+ userId));
 
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
@@ -62,7 +64,7 @@ public class UserService {
 
     public void deleteUser(Long userId) {
         if (!userRepository.existsById(userId)) {
-            throw new IllegalArgumentException("User not found with id: " + userId);
+            throw new ResourceNotFoundException("User not found with id: " + userId);
         }
         userRepository.deleteById(userId);
     }

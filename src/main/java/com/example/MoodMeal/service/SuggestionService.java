@@ -1,5 +1,6 @@
 package com.example.MoodMeal.service;
 
+import com.example.MoodMeal.exception.ResourceNotFoundException;
 import com.example.MoodMeal.repository.MealRepository;
 import com.example.MoodMeal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class SuggestionService {
 
     public List<Meal> suggestMeals(Long userId, MoodType moodType){
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with userId: "+userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with userId: "+userId));
 
         List<Meal> meals = mealRepository.findBySuitableMoods(moodType);
 

@@ -1,5 +1,6 @@
 package com.example.MoodMeal.service;
 
+import com.example.MoodMeal.exception.ResourceNotFoundException;
 import com.example.MoodMeal.model.Mood;
 import com.example.MoodMeal.model.MoodType;
 import com.example.MoodMeal.model.User;
@@ -25,7 +26,7 @@ public class MoodService {
 
     public Mood recordMood(Long userId, MoodType moodType, String description){
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with userId"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with userId"));
 
         Mood mood = new Mood();
         mood.setUser(user);
@@ -41,7 +42,7 @@ public class MoodService {
 
     public Mood getMoodById(Long moodId){
         return moodRepository.findById(moodId)
-                .orElseThrow(() -> new IllegalArgumentException("Mood not found with moodId : "+moodId));
+                .orElseThrow(() -> new ResourceNotFoundException("Mood not found with moodId : "+moodId));
     }
 
     public Mood updateMood(Long moodId,MoodType moodType,String description){
@@ -53,7 +54,7 @@ public class MoodService {
 
     public void deleteMood(Long moodId){
         if(!moodRepository.existsById(moodId)){
-            throw new IllegalArgumentException("Mood not found with moodId: "+ moodId);
+            throw new ResourceNotFoundException("Mood not found with moodId: "+ moodId);
         }
         moodRepository.deleteById(moodId);
     }
