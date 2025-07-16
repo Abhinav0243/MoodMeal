@@ -22,11 +22,7 @@ public class UserController {
         User createdUser=userService.registerUser(user);
         return ResponseEntity.ok(createdUser);
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id){
-        User user=userService.getUserById(id);
-        return ResponseEntity.ok(user);
-    }
+
     @GetMapping("/username/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable String username){
         User user=userService.getUserByUsername(username);
@@ -35,6 +31,11 @@ public class UserController {
     @GetMapping("/email/{email}")
     public ResponseEntity<User> getUserByEmail(@PathVariable String email){
         User user=userService.getUserByEmail(email);
+        return ResponseEntity.ok(user);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id){
+        User user=userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
     @PutMapping("/{id}")
