@@ -59,7 +59,7 @@ public class MealController {
         List<Meal> meals=mealService.getMealsByDietaryTag(tag);
         return ResponseEntity.ok(meals);
     }
-    @PostMapping("/meals")
+    @PostMapping("/dto")
     public ResponseEntity<String> createMeal(@RequestBody MealDTO mealDTO) {
         mealService.createMeal(mealDTO);
         return ResponseEntity.ok("Meal created");
