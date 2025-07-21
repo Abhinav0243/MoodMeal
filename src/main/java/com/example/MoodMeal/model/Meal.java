@@ -29,7 +29,7 @@ public class Meal {
     @Column(nullable = false,length = 100)
     private String name;
 
-    @Column(nullable = false,length = 200)
+    @Column(nullable = true,length = 200)
     private String description;
 
     @Column(length = 100)
@@ -46,25 +46,36 @@ public class Meal {
     @Column
     private Integer calories;
 
-    @Column(length = 255)
+    @Column(length = 255,name="allergens")
     private String allergens;
 
-    public String getMoodType() {
+//    public String getMoodType() {
+//        return moodType;
+//    }
+//
+//    public void setMoodType(String moodType) {
+//        this.moodType = moodType;
+//    }
+
+//    private String moodType; // ✅ this must exist
+
+
+//    @ElementCollection(targetClass = MoodType.class)
+//    @CollectionTable(name = "meal_moods", joinColumns = @JoinColumn(name = "meal_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "mood_type")
+    private MoodType moodType;
+
+    public MoodType getMoodType() {
         return moodType;
     }
 
-    public void setMoodType(String moodType) {
+    public void setMoodType(MoodType moodType) {
         this.moodType = moodType;
     }
 
-    private String moodType; // ✅ this must exist
+//    private Set<MoodType> suitableMoods = new HashSet<>();
 
-
-    @ElementCollection(targetClass = MoodType.class)
-    @CollectionTable(name = "meal_moods", joinColumns = @JoinColumn(name = "meal_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "mood_type")
-    private Set<MoodType> suitableMoods = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -130,11 +141,11 @@ public class Meal {
         this.allergens = allergens;
     }
 
-    public Set<MoodType> getSuitableMoods() {
-        return suitableMoods;
-    }
-
-    public void setSuitableMoods(Set<MoodType> suitableMoods) {
-        this.suitableMoods = suitableMoods;
-    }
+//    public Set<MoodType> getSuitableMoods() {
+//        return suitableMoods;
+//    }
+//
+//    public void setSuitableMoods(Set<MoodType> suitableMoods) {
+//        this.suitableMoods = suitableMoods;
+//    }
 }

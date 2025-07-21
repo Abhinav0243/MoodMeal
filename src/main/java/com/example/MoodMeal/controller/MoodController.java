@@ -6,6 +6,7 @@ import com.example.MoodMeal.service.MoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.MoodMeal.dto.MoodRecordRequest;
 
 import java.util.List;
 
@@ -19,7 +20,10 @@ public class MoodController {
     }
 
     @PostMapping("/record")
-    public ResponseEntity<Mood> recordMood(@RequestParam Long userId, @RequestParam MoodType moodType,@RequestParam(required=false)String description){
+    public ResponseEntity<Mood> recordMood(@RequestBody MoodRecordRequest request){
+        MoodType moodType=request.getMoodType();
+        String description=request.getDescription();
+        Long userId=request.getUserId();
         Mood mood=moodService.recordMood(userId, moodType,description);
         return ResponseEntity.ok(mood);
     }

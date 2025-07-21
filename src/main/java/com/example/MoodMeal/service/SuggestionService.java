@@ -29,15 +29,55 @@ public class SuggestionService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with userId: "+userId));
 
-        List<Meal> meals = mealRepository.findBySuitableMoods(moodType);
+        List<Meal> meals = mealRepository.findByMoodType(moodType);
 
-        String dietaryPrefs = user.getDietaryPerferences();
+        // Logging what we got
+        System.out.println("Fetched " + meals.size() + " meals for mood: " + moodType);
+        meals.forEach(meal -> System.out.println("Meal: " + meal.getName() + ", MoodType: " + meal.getMoodType()));
+
+        String dietaryPrefs = user.getDietaryPreferences();
         String allergies = user.getAllergies();
 
-        return meals.stream()
-                .filter(meal -> dietaryPrefs == null || dietaryPrefs.isBlank() || (meal.getDietaryTags() != null && meal.getDietaryTags().toLowerCase().contains(dietaryPrefs.toLowerCase())))
-                .filter(meal -> allergies == null || allergies.isBlank() || (meal.getAllergens() == null || !meal.getAllergens().toLowerCase().contains(allergies.toLowerCase())))
-                .collect(Collectors.toList());
+        System.out.println("User Dietary Prefs: " + dietaryPrefs);
+        System.out.println("User Allergens: " + allergies);
+
+
+
+        List<Meal> filtered = meals.stream()
+                .filter(meal -> {
+                    String mealTags = meal.getDietaryTags() != null ? meal.getDietaryTags().toLowerCase() : "";
+
+                    boolean dietaryMatch;
+                    if (dietaryPrefs == null || dietaryPrefs.equalsIgnoreCase("None")) {
+                        dietaryMatch = true; // No preference, accept all
+                    } else {
+                        String pref = dietaryPrefs.toLowerCase();
+                        switch (pref) {
+                            case "vegan":
+                                dietaryMatch = mealTags.contains("vegan");
+                                break;
+                            case "vegetarian":
+                                dietaryMatch = mealTags.contains("vegetarian") || mealTags.contains("vegan");
+                                break;
+                            case "non-vegetarian":
+                                dietaryMatch = true; // Accept all types
+                                break;
+                            default:
+                                dietaryMatch = false; // Unknown preference
+                        }
+                    }
+
+                    boolean allergenSafe = allergies == null || allergies.equalsIgnoreCase("None") ||
+                            (meal.getAllergens() == null || !meal.getAllergens().toLowerCase().contains(allergies.toLowerCase()));
+
+                    System.out.println("Meal: " + meal.getName() + " => DietaryMatch: " + dietaryMatch + ", AllergenSafe: " + allergenSafe);
+
+                    return dietaryMatch && allergenSafe;
+                })
+                .toList();
+
+        System.out.println("Filtered Meal Count: " + filtered.size());
+        return filtered;
     }
 
     public List<Meal> suggestMealByCuisine(Long userId, MoodType moodType, String cuisine){

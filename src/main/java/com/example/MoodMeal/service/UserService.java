@@ -51,7 +51,7 @@ public class UserService {
         existingUser.setFullName(updatedUser.getFullName());
         existingUser.setPhone(updatedUser.getPhone());
         existingUser.setAllergies(updatedUser.getAllergies());
-        existingUser.setDietaryPerferences(updatedUser.getDietaryPerferences());
+        existingUser.setDietaryPreferences(updatedUser.getDietaryPreferences());
         return userRepository.save(existingUser);
     }
     public void changePassword(Long userId,String newPassword){
