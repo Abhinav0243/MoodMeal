@@ -42,6 +42,4 @@ public class MoodController {
         moodService.deleteMood(moodId);
         return ResponseEntity.ok("Mood deleted Successfully");
     }
-
-
 }

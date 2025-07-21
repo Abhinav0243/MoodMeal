@@ -2,7 +2,6 @@ package com.example.MoodMeal.security;
 
 import com.example.MoodMeal.service.CustomerDetailsService;
 import jakarta.servlet.Filter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,7 +21,6 @@ public class SecurityConfig {
     private final JWTAuthFilter jwtAuthFilter;
     private final CustomerDetailsService customerDetailsService;
 
-    @Autowired
     public SecurityConfig(JWTAuthFilter jwtAuthFilter, CustomerDetailsService customerDetailsService) {
         this.jwtAuthFilter = jwtAuthFilter;
         this.customerDetailsService = customerDetailsService;
@@ -68,7 +66,7 @@ public class SecurityConfig {
                         .anyRequest().permitAll()
                 )
                 .authenticationProvider(authenticationProvider()) // Register your provider
-                .addFilterBefore((Filter) jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); // JWT before default filter
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); // JWT before default filter
 
         return http.build();
     }
