@@ -39,7 +39,7 @@ public class MealService {
         meal.setAllergens(updatedMeal.getAllergens());
         meal.setDietaryTags(updatedMeal.getDietaryTags());
         meal.setIngredients(updatedMeal.getIngredients());
-        meal.setSuitableMoods(updatedMeal.getSuitableMoods());
+//        meal.setSuitableMoods(updatedMeal.getSuitableMoods());
         return mealRepository.save(meal);
     }
 
@@ -50,8 +50,12 @@ public class MealService {
     }
 
     public List<Meal> getMealByMood(MoodType moodType){
+        System.out.println("DEBUG: Searching for meals with MoodType: " + moodType);
+        List<Meal> meals = mealRepository.findByMoodType(moodType);
+        System.out.println("DEBUG: Found " + meals.size() + " meals for MoodType: " + moodType); // Add this line
+        return meals;
 
-        return mealRepository.findBySuitableMoods(moodType);
+//        return mealRepository.findByMoodType(moodType);
     }
     public List<Meal> getMealByCuisine(String cuisine){
         return mealRepository.findByCuisineIgnoreCase(cuisine);
@@ -65,6 +69,10 @@ public class MealService {
         meal.setCategory(mealDTO.getCategory());
         // Assuming you have an enum or string moodType field
         meal.setMoodType(mealDTO.getMoodType());
+        meal.setCuisine(mealDTO.getCuisine());                // ✅ add this
+        meal.setDietaryTags(mealDTO.getDietaryTags());        // ✅ add this
+        meal.setDescription(mealDTO.getDescription());
+        meal.setAllergens(mealDTO.getAllergens());
         mealRepository.save(meal);
     }
 }

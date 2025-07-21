@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/meals")
 public class MealController {
@@ -19,12 +19,13 @@ public class MealController {
     public MealController(MealService mealService){
         this.mealService=mealService;
     }
-    @PostMapping
-    public ResponseEntity<Meal> addMeal(@RequestBody Meal meal){
-        Meal createdMeal=mealService.addMeal(meal);
-        return ResponseEntity.ok(createdMeal);
-    }
+//    @PostMapping("/addmeal")
+//    public ResponseEntity<Meal> addMeal(@RequestBody Meal meal){
+//        Meal createdMeal=mealService.addMeal(meal);
+//        return ResponseEntity.ok(createdMeal);
+//    }
     @GetMapping
+
     public ResponseEntity<List<Meal>> getAllMeals(){
         List<Meal> meals=mealService.getAllMeals();
         return ResponseEntity.ok(meals);
@@ -47,6 +48,8 @@ public class MealController {
     @GetMapping("/by-mood")
     public ResponseEntity<List<Meal>> getMealsByMood(@RequestParam MoodType moodType){
         List<Meal> meals=mealService.getMealByMood(moodType);
+
+
         return ResponseEntity.ok(meals);
     }
     @GetMapping("/by-cuisine")

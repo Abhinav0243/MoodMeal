@@ -9,10 +9,10 @@ import java.util.List;
 public interface MealRepository extends JpaRepository<Meal, Long> {
 
 
-    List<Meal> findBySuitableMoods(MoodType moodType);
+    List<Meal> findByMoodType(MoodType moodType);
 
 
-    List<Meal> findByCuisineIgnoreCase(String cusine);
+    List<Meal> findByCuisineIgnoreCase(String cuisine);
 
 
     List<Meal> findByDietaryTagsContainingIgnoreCase(String dietaryTags);

@@ -40,7 +40,7 @@ public class User {
     private Long phone;
 
     @Column(length = 200)
-    private String dietaryPerferences;
+    private String dietaryPreferences;
 
     @Column(length = 200)
     private String allergies;
@@ -101,12 +101,12 @@ public class User {
         this.phone = phone;
     }
 
-    public String getDietaryPerferences() {
-        return dietaryPerferences;
+    public String getDietaryPreferences() {
+        return dietaryPreferences;
     }
 
-    public void setDietaryPerferences(String dietaryPerferences) {
-        this.dietaryPerferences = dietaryPerferences;
+    public void setDietaryPreferences(String dietaryPreferences) {
+        this.dietaryPreferences = dietaryPreferences;
     }
 
     public String getAllergies() {

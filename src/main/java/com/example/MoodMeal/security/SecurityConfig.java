@@ -26,16 +26,19 @@ public class SecurityConfig {
         this.customerDetailsService = customerDetailsService;
     }
 
+    // ➤ Password encoder using BCrypt
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    // ➤ Expose your custom UserDetailsService as a Bean
     @Bean
     public UserDetailsService userDetailsService() {
         return customerDetailsService;
     }
 
+    // ➤ DaoAuthenticationProvider for authentication logic
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -44,24 +47,26 @@ public class SecurityConfig {
         return authProvider;
     }
 
+    // ➤ AuthenticationManager bean (used in AuthController)
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
 
+    // ➤ Main Spring Security filter chain
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
-                .cors(cors -> {}) // You may want to configure allowed origins explicitly
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .csrf(csrf -> csrf.disable()) // Disable CSRF for API
+                .cors(cors -> {})             // Allow CORS (custom config can be added if needed)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless session
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/users/register", "/api/users/login").permitAll()
                         .requestMatchers("/api/meals/**", "/api/moods/**", "/api/suggestions/**").authenticated()
                         .anyRequest().permitAll()
                 )
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .authenticationProvider(authenticationProvider()) // Register your provider
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); // JWT before default filter
 
         return http.build();
     }

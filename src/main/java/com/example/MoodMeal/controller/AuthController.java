@@ -12,7 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/users")
 public class AuthController {
@@ -34,14 +34,15 @@ public class AuthController {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            loginRequest.getUsername(), loginRequest.getPassword()
+                            loginRequest.getEmail(), loginRequest.getPassword()
                     )
             );
 
-            UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
+            UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
             String token = jwtUtil.generateToken(userDetails);
 
-            User user = userRepository.findByUsername(loginRequest.getUsername()).orElse(null);
+            User user = userRepository.findByEmail(loginRequest.getEmail()).orElse(null);
+
 
             return ResponseEntity.ok(
                     new LoginResponse(token, user.getId(), user.getUsername(), user.getRoles())
